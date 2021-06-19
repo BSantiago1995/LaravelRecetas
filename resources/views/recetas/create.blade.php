@@ -11,7 +11,7 @@
             <form method="POST" action="{{route('recetas.store')}}" novalidate>
                 @csrf
                 <div class="form group">
-                <label for="nombre">Nombre Receta</label>
+                <label for="nombre">Nombre Recetas</label>
                 <input type="text"  name="nombre" class="form-control
                 @error('nombre') is-invalid @enderror" 
                 id="nombre" placeholder="Nombre Receta" value={{old('nombre')}}><!--old para mantener el nombre y el error para que marque la casilla -->
