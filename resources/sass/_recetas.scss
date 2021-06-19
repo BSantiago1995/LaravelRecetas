@@ -1,0 +1,11 @@
+//typhografy
+body{
+    font-family: $parrafo-font-family;
+}
+.bg-primary .navbar-brand{
+color: aliceblue;
+font-family: font-family-sans-serif;
+&:hover{
+    color:white
+}
+}
