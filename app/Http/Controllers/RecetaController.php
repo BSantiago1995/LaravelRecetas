@@ -14,13 +14,13 @@ class RecetaController extends Controller
     }
     //
     public function index(){
-        
+       
         return view('recetas.index');
        
     }
     public function create(){
-        
-        return view('recetas.create');
+        $categorias=DB::table('categorias_recetas')->get()->pluck('nombre','id');
+        return view('recetas.create')->with('categorias',$categorias);
        
     }
     public function store(Request $request)

@@ -13,12 +13,19 @@ class CreateRecetasTable extends Migration
      */
     public function up()
     {
+        Schema:: create ('categorias_recetas',function (Blueprint $table) {
+            $table->id();
+            $table->string('nombre');
+            $table->timestamps();
+        });
         Schema::create('recetas', function (Blueprint $table) {
             $table->id();
             $table ->string('nombre');
             $table ->text('ingredientes');
             $table ->text('preparacion');
             $table ->string('imagen');
+            $table ->foreignId('user_id')->references('id')->on('users'); //usuario que crea la receta
+            $table ->foreignId('categoria_id') ->references('id') ->on('categorias_recetas')->comment('Categoria de la receta'); //añadir la foreigkey comment es para comentario del campo
             $table->timestamps();
         });
     }
@@ -30,6 +37,7 @@ class CreateRecetasTable extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('categoria_receta');
         Schema::dropIfExists('recetas');
     }
 }
