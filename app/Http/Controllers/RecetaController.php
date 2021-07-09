@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Intervention\Image\Facades\Image;
 
 class RecetaController extends Controller
 {
@@ -15,7 +17,8 @@ class RecetaController extends Controller
     //
     public function index(){
        
-        return view('recetas.index');
+        $userRecetas=Auth::user()->userRecetas;
+        return view('recetas.index')->with('userRecetas',$userRecetas);
        
     }
     public function create(){
@@ -25,14 +28,30 @@ class RecetaController extends Controller
     }
     public function store(Request $request)
     {
-        
+    
         /// la variable es cualquiera //validacion para campos vacios
         $data=$request -> validate([
-            'nombre'=> 'required|min:6'
+            'nombre'=> 'required|min:6',
+            'categorias' => 'required',
+            'ingrediente' => 'required',
+            'preparacion' => 'required',
+             //'imagen'=>'required|image'
         ]);
+        // añadir la url de la imagen
+        $ruta_imagen=$request['imagen']->store('upload-image','public');
+        
+        // para redimensionar la imagen
+        /*$img= Image::make(public_path("storage/{$ruta_imagen}"))-> fit(1100,550);
+        $img->save();*/
         //insertar la informacion del formulario a la base de datos
-      DB::table('recetas')-> insert([
-          'nombre' => $data['nombre']
+        DB::table('recetas')-> insert([
+          'nombre' => $data['nombre'],
+          'ingredientes'=> $data['ingrediente'],
+          'preparacion'=> $data['preparacion'],
+          'imagen' =>$ruta_imagen,
+          'user_id' => Auth::user()->id,
+          'categoria_id'=> $data['categorias'],          
+          
           ]);
         // se redirecciona a la vistea 
         return redirect()-> action([RecetaController::class, 'index']);
