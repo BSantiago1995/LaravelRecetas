@@ -18,7 +18,7 @@
             @foreach ($userRecetas as $usuarioReceta)
             <tr>
                 <td>{{$usuarioReceta -> nombre}}</td>
-                <td>{{$usuarioReceta -> categoria_id}}</td>
+                <td>{{$usuarioReceta -> categoriaReceta -> nombre}}</td>
                 <td>
                     <a href="" class="btn btn-success">Ver</a>
                     <a href="" class="btn btn-dark">Actualizar</a>

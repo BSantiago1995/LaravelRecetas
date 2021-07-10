@@ -15,19 +15,19 @@ class CategoriasSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('categorias_recetas')->insert([
+        DB::table('categoria_recetas')->insert([
             'nombre' => 'Pizza',
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
 
         ]);
-        DB::table('categorias_recetas')->insert([
+        DB::table('categoria_recetas')->insert([
             'nombre' => 'Plato Fuerte',
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
 
         ]);
-        DB::table('categorias_recetas')->insert([
+        DB::table('categoria_recetas')->insert([
             'nombre' => 'Postres',
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
