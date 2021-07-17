@@ -20,8 +20,8 @@
                 <td>{{$usuarioReceta -> nombre}}</td>
                 <td>{{$usuarioReceta -> categoriaReceta -> nombre}}</td>
                 <td>
-                    <a href="" class="btn btn-success">Ver</a>
-                    <a href="" class="btn btn-dark">Actualizar</a>
+                    <a href="{{route('recetas.show',['receta'=>$usuarioReceta ->id])}}" class="btn btn-success">Ver</a>
+                    <a href="{{route('recetas.edit',['receta'=>$usuarioReceta ->id])}}" class="btn btn-dark">Editar</a>
                     <a href="" class="btn btn-danger">Eliminar</a>
                 </td>
              </tr>    

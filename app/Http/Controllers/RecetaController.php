@@ -13,7 +13,7 @@ class RecetaController extends Controller
     //constructor para que valore las rutas
     public function __construct() //siempre es doble guion bajo 
     {
-        $this->middleware('auth');
+        $this->middleware('auth',['except'=>'show']);
     }
     //
     public function index(){
@@ -72,4 +72,39 @@ class RecetaController extends Controller
     public function show(Receta $receta){
         return view('recetas.show')->with('receta',$receta);
     }
-}
+    public function edit(Receta $receta){
+        $categorias=DB::table('categoria_recetas')->get()->pluck('nombre','id');
+        return view('recetas.edit')->with('categorias',$categorias)
+                                    ->with('receta',$receta);
+    }
+    public function update(Request $request, Receta $receta){
+        $data=$request -> validate([
+            'nombre'=> 'required|min:6',
+            'categorias' => 'required',
+            'ingrediente' => 'required',
+            'preparacion' => 'required',
+             
+        ]);
+        //asignar valores 
+
+        $receta->nombre=$data['nombre'];
+        $receta->categoria_id=$data['categorias'];
+        $receta->ingredientes=$data['ingrediente'];
+        $receta->preparacion=$data['preparacion'];
+        
+        //para controlar si es nueva imagen
+
+        if($request['imagen']){
+            //guardar la nueva imagen
+            $ruta_imagen=$request['imagen']->store('upload-image','public');
+            //estilo
+            $img= Image::make(public_path("storage/{$ruta_imagen}"))-> fit(1100,550);
+            $img->save();
+            $receta->imagen=$ruta_imagen;
+        }
+
+        //guardo informacion
+        $receta->save();
+        return view('receta.index');
+    }
+}   
