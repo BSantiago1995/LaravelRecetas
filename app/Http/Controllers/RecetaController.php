@@ -105,6 +105,6 @@ class RecetaController extends Controller
 
         //guardo informacion
         $receta->save();
-        return view('receta.index');
+        return redirect()-> action([RecetaController::class, 'index']);;
     }
 }   
