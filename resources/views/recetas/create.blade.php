@@ -3,8 +3,9 @@
 @section('styles')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/trix/1.3.1/trix.css" integrity="sha512-CWdvnJD7uGtuypLLe5rLU3eUAkbzBR3Bm1SFPEaRfvXXI2v2H5Y0057EMTzNuGGRIznt8+128QIDQ8RqmHbAdg==" crossorigin="anonymous" referrerpolicy="no-referrer" />  
 @endsection
+
 @section('botones')
-    <a class="btn btn-primary" href="{{route('recetas.index')}}">Volver a Receta</a>
+    @include('ui.listarecetas')
 @endsection
 
 @section('content')

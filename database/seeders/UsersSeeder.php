@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -15,32 +16,21 @@ class UsersSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->insert([
-            'name' => 'Bryan',
-            'email' => 'bryan@gmail.com',
-            'password' => Hash::make('123456789'),
-            'address' => 'Pio XII',
+        $user=User::create([
+            'name'=>'Bryan Ortiz',
+            'email'=> 'bryan@gmail.com',
+            'password'=>Hash::make('123456789'),
+            'url'=>'https://laravel.com/',
             'created_at' => date('Y-m-d H:i:s'),
-            'updated_at' => date('Y-m-d H:i:s'),
-
+            'updated_at' => date('Y-m-d H:i:s')
         ]);
-        DB::table('users')->insert([
-            'name' => 'Viviana',
-            'email' => 'viviana@gmail.com',
-            'password' => Hash::make('123456789'),
-            'address' => 'Solanda',
+        $user=User::create([
+            'name'=>'Keneth',
+            'email'=> 'ken@gmail.com',
+            'password'=>Hash::make('123456789'),
+            'url'=>'https://laravel.com/',
             'created_at' => date('Y-m-d H:i:s'),
-            'updated_at' => date('Y-m-d H:i:s'),
-
-        ]);
-        DB::table('users')->insert([
-            'name' => 'Cristian',
-            'email' => 'cristian@gmail.com',
-            'address' => 'Quitumbe',
-            'password' => Hash::make('123456789'),
-            'created_at' => date('Y-m-d H:i:s'),
-            'updated_at' => date('Y-m-d H:i:s'),
-
+            'updated_at' => date('Y-m-d H:i:s')
         ]);
     }
 }

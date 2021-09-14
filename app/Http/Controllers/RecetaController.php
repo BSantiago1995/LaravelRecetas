@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Facades\Image;
+use PHPUnit\Framework\MockObject\Verifiable;
 
 class RecetaController extends Controller
 {
@@ -17,9 +18,10 @@ class RecetaController extends Controller
     }
     //
     public function index(){
-       
+        $usuario = Auth::user();
         $userRecetas=Auth::user()->userRecetas;
-        return view('recetas.index')->with('userRecetas',$userRecetas);
+        return view('recetas.index')->with('userRecetas',$userRecetas)
+                                    ->with('usuario',$usuario);
        
     }
     public function create(){
@@ -73,11 +75,14 @@ class RecetaController extends Controller
         return view('recetas.show')->with('receta',$receta);
     }
     public function edit(Receta $receta){
+        $this->authorize('update',$receta);
         $categorias=DB::table('categoria_recetas')->get()->pluck('nombre','id');
         return view('recetas.edit')->with('categorias',$categorias)
                                     ->with('receta',$receta);
     }
     public function update(Request $request, Receta $receta){
+        //verificacion de policy
+        $this->authorize('update',$receta);
         $data=$request -> validate([
             'nombre'=> 'required|min:6',
             'categorias' => 'required',
@@ -105,6 +110,13 @@ class RecetaController extends Controller
 
         //guardo informacion
         $receta->save();
-        return redirect()-> action([RecetaController::class, 'index']);;
+        return redirect()-> action([RecetaController::class, 'index']);
+    }
+    public function destroy(Receta $receta){
+        //verificacion 
+        $this->authorize('delete',$receta);
+        //agregar metodo para eliminar 
+        $receta->delete();
+        return redirect()-> action([RecetaController::class, 'index']);
     }
 }   

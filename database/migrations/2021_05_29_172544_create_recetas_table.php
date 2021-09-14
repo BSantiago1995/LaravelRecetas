@@ -25,7 +25,7 @@ class CreateRecetasTable extends Migration
             $table ->text('preparacion');
             $table ->string('imagen');
             $table ->foreignId('user_id')->references('id')->on('users'); //usuario que crea la receta
-            $table ->foreignId('categoria_id') ->references('id') ->on('categorias_recetas')->comment('Categoria de la receta'); //añadir la foreigkey comment es para comentario del campo
+            $table ->foreignId('categoria_id') ->references('id') ->on('categoria_recetas')->comment('Categoria de la receta'); //añadir la foreigkey comment es para comentario del campo
             $table->timestamps();
         });
     }

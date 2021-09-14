@@ -1,5 +1,7 @@
 @extends('layouts.app')
-
+@section('botones')
+    @include('ui.listarecetas')
+@endsection
 @section('content')
 <!-- imprime la variable llavellave $receta llavellave-->
 <article class="contenido-receta">

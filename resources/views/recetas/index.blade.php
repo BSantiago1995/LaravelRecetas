@@ -1,6 +1,7 @@
+
 @extends('layouts.app')
 @section('botones')
-    <a class="btn btn-success" href="{{route('recetas.create')}}">Crear Receta</a>
+    @include('Ui.Navegacion')
 @endsection
 
 @section('content')
@@ -20,9 +21,20 @@
                 <td>{{$usuarioReceta -> nombre}}</td>
                 <td>{{$usuarioReceta -> categoriaReceta -> nombre}}</td>
                 <td>
-                    <a href="{{route('recetas.show',['receta'=>$usuarioReceta ->id])}}" class="btn btn-success">Ver</a>
-                    <a href="{{route('recetas.edit',['receta'=>$usuarioReceta ->id])}}" class="btn btn-dark">Editar</a>
-                    <a href="" class="btn btn-danger">Eliminar</a>
+                    <div class="row">
+                    <div class="col-md-3"> <a href="{{route('recetas.show',['receta'=>$usuarioReceta ->id])}}" class="btn btn-success d-block">Ver</a></div>
+                    <div class="col-md-3"><a href="{{route('recetas.edit',['receta'=>$usuarioReceta ->id])}}" class="btn btn-dark d-block">Editar</a></div>
+                    <div class="col-md-3">
+                        
+                        <!-- se envuelve en un form puesto que no tiene ruta
+                        <form method="POST" action="{{route('recetas.destroy',['receta'=>$usuarioReceta ->id])}}">
+                            @csrf
+                            @method('delete') no se lo ubica asi puesto que se va integrar sweetalert
+                            el boton se pasa como componente-->
+                        <eliminar-receta recetas-id={{$usuarioReceta->id}}></eliminar-receta>
+                        <!--</form>-->
+                    </div>
+                    </div>
                 </td>
              </tr>    
             @endforeach
