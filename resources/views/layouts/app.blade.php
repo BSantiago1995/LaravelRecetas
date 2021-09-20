@@ -15,7 +15,7 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Styles -->
     @yield('styles')
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -81,19 +81,25 @@
                 </div>
             </div>
         </nav>
+        <main>
+            @yield('content1')
+            @yield('footer')
+        </main>
         <div class="container">
-            <div class="row">
+          <div class="row">
                 <div class="py-3 mt-4 col-12">
                     @yield('botones')
                 </div>
                 <main class="py-3 mt-4 col-12">
                     @yield('content')
                 </main>  
+                 
             </div>
             
         </div>
-        
+               
     </div>
+    
     @yield('script')
 </body>
 </html>

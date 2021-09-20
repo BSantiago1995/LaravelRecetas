@@ -3,6 +3,7 @@
     @include('ui.listarecetas')
 @endsection
 @section('content')
+
 <!-- imprime la variable llavellave $receta llavellave-->
 <article class="contenido-receta">
     <h1 class="text-center mb-4">{{$receta->nombre}}</h1>
@@ -28,6 +29,9 @@
     <div class="preparacion">
         <h2 class="my-3 text-primary">Preparacion</h2>
         {!!$receta->preparacion!!}
+    </div>
+    <div class="justify-content-center row text-center">
+    <like-button receta-id="{{$receta->id}}" likes="{{$like}}" num-like="{{$likes}}" ></like-button>
     </div>
 </article>
 @endsection

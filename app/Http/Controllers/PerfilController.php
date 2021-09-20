@@ -48,17 +48,18 @@ class PerfilController extends Controller
     public function update(Request $request, Perfil $perfil)
     {
         //policy"
-            $this->authorize('update',$perfil);
+        $this->authorize('update',$perfil);
         //validar
             $data=request()->validate([
                 'nombre' => 'required',
                 'url'=>'required',
-                'biografía'=> 'required',
+                'bibliografia'=> 'required',
             ]);
+            
         //si el usuario sube una imagen
          if($request['imagen']){
             $ruta_imagen=$request['imagen']->store('upload-perfil','public');
-            $ruta_imagen->save();
+            //$ruta_imagen->save();
 
             //arreglo de imagenes // array merge es para enviar dos paramtros 
             $array_imagen = ['imagen'=>$ruta_imagen];
@@ -66,7 +67,7 @@ class PerfilController extends Controller
 
         // dd(data)
             auth()->user()->name=$data['nombre'];
-            auth()->user()->name=$data['url'];
+            auth()->user()->url=$data['url'];
             auth()->user()->save();
         //eliminar url y name de data
             unset($data['nombre']);
@@ -75,7 +76,7 @@ class PerfilController extends Controller
         // guardar información
             auth()->user()->userPerfil()->update(array_merge( // dos paramtros de tipo array 
                 $data,
-                $ruta_imagen ?? [] //almacena la imagen
+                $array_imagen ?? [] //almacena la imagen
             )             
             );
         
@@ -98,7 +99,10 @@ class PerfilController extends Controller
      */
     public function show(Perfil $perfil)
     {
-        return view('perfiles.show')->with('perfil', $perfil);
+        $usu_rece=$perfil->user_id;
+        $userRecetas=Receta::where('user_id',$usu_rece)->paginate(3);
+        return view('perfiles.show')->with('perfil', $perfil)
+                                    ->with('userRecetas',$userRecetas);
     }
 
    

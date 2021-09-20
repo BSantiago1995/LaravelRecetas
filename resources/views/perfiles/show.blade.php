@@ -1,6 +1,10 @@
 @extends('layouts.app')
+@section('botones')
+    @include('ui.listarecetas')
+@endsection
 
 @section('content')
+{{$perfil}}
 {{--    {{$perfil->perfilUser}}--}}
     <div class="container">
         <div class="row">
@@ -13,9 +17,30 @@
                 <h2 class="text-center mb-2 text-primary">{{$perfil->perfilUser->name}}</h2>
                 <a href="{{$perfil->perfilUser->url}}">Visitar Sitio Web</a>
                 <div class="biografia">
-                    {!! $perfil->biografia !!}
+                    {!! $perfil->bibliografia    !!}
                 </div>
             </div>
         </div>
     </div>
+    <h2 class="text-center my-5">Recetas creadas por : {{$perfil->perfilUser->name}}</h2>
+    <div lass="container" >
+        <div class="row mx-auto bg-white p-4">
+            @if(count($userRecetas)>0)
+             @foreach ($userRecetas as $userReceta)
+                 <div class="col-md-4 mb-4">
+                    <div class="card" >
+                        <img src="/storage/{{$userReceta->imagen}}" class="card-img-top"  alt="imagen receta">
+                        <div class="card-body">
+                            <h3>{{$userReceta->nombre}}</h3>
+                            <a href="{{route('recetas.show',['receta'=>$userReceta->id])}}" class="btn btn-primary d-block mt-4 text-uppercase font-weight-bold">Ver Receta</a>
+                        </div>
+                    </div>
+                 </div>
+             @endforeach
+            @else
+            <p class="text-center w-100">No existen recetas aún...</p>
+            @endif  
+        </div>
+    </div>
+    {{$userRecetas}}
 @endsection

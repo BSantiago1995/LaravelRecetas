@@ -22,9 +22,10 @@ window.Vue = require('vue').default;
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 //para l trix no tome html
 Vue.use(VueSweetalert2);
-Vue.config.ignoredElements=['trixe-ditor','trix-toolbar'];
+Vue.config.ignoredElements=['trix-editor','trix-toolbar'];
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('eliminar-receta', require('./components/EliminarReceta.vue').default);
+Vue.component('like-button', require('./components/LikeButton.vue').default);
 
 
 /**
@@ -36,3 +37,8 @@ Vue.component('eliminar-receta', require('./components/EliminarReceta.vue').defa
 const app = new Vue({
     el: '#app',
 });
+
+$('.like-btn').on('click', function() {
+    $(this).toggleClass('like-active');
+ });
+ 

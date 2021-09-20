@@ -19,9 +19,16 @@ class RecetaController extends Controller
     //
     public function index(){
         $usuario = Auth::user();
-        $userRecetas=Auth::user()->userRecetas;
+        $usu_auten=Auth::user()->id;
+        //paginte limita los datos que se van a traer 
+        $userRecetas=Receta::where('user_id',$usu_auten)->paginate(2);
+        //recetas que le gustan al usuario
+        $like_usuario=Auth::user()->ilike;
+        //$userRecetas=Auth::user()->userRecetas->paginate(2);
+        
         return view('recetas.index')->with('userRecetas',$userRecetas)
-                                    ->with('usuario',$usuario);
+                                    ->with('usuario',$usuario)
+                                    ->with('likeusu',$like_usuario);
        
     }
     public function create(){
@@ -72,7 +79,13 @@ class RecetaController extends Controller
         //dd($request->all());//para visualizar todo lo que enviamos en el metodo Post
     }
     public function show(Receta $receta){
-        return view('recetas.show')->with('receta',$receta);
+        //validacion del like con un ternario ?
+        $like=(Auth::user())?Auth::user()->iLike->contains($receta->id):false;
+        //cantidad e likes de la receta
+        $likes=$receta->likes()->count();
+        return view('recetas.show')->with('receta',$receta)
+                                    ->with('like',$like)
+                                    ->with('likes',$likes);
     }
     public function edit(Receta $receta){
         $this->authorize('update',$receta);

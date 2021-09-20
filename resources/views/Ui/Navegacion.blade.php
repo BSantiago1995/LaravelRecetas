@@ -1,5 +1,5 @@
 {{--Auth::user() es la clase de autenticacion para traer los valores del usuario--}}
-{{Auth::user()->id}}
+
 <a class="btn btn-outline-success text-uppercase font-weight-bold" href="{{route('recetas.create')}}">
     <svg class="icono" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
         <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />

@@ -24,4 +24,9 @@ class Receta extends Model
         //relacion de uno a uno
         return $this->belongsTo(User::class,'user_id');
     }
+    //likes de la receta
+    public function likes(){
+        //relaciond e n-n
+        return $this->belongsToMany(User::class,'like_recetas');
+    }
 }

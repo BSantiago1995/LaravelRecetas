@@ -40,6 +40,26 @@
             @endforeach
         </tbody>
     </table>
+    <!--la paginacion siempre despues de la tabla con el metodo links-->
+    <div class="col-12 mt-4 justify-content-center d-flex">
+    {{$userRecetas->links()}}
+    </div>  
 </div>
+<h2 class="text-center my-5">Recetas que te gustan</h2>
+    
+        <div class="col-md-10 mx-auto bg-white p-3">
+          <ul class="list-group">
+            @if(count($likeusu)>0)
+            @foreach ($likeusu as $likeusuario)
+               <li class="list-group-item d-flex justify-content-between align-items-center">
+                   <p>{{$likeusuario->nombre}}</p>
+                   <a class="btn btn-outline-success text-uppercase font-weight-bold  align-items-left" href="{{route('recetas.show',['receta'=>$likeusuario->id])}}">Ver</a>
+               </li>
+            @endforeach
+           @else
+           <p class="text-center w-100">No existen recetas aún...</p>
+           @endif  
+          </ul>
+        </div>
 @endsection
 

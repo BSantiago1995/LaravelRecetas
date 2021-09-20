@@ -44,11 +44,11 @@
                         </div>
 
                             <div class="form-group mt-3">
-                                <label for="biografia">Biografia</label>
-                                <input id="biografia" type="hidden" name="biografia" value="{{$perfil->biografia}}">
-                                <trix-editor class="form-control @error('biografia') is-invalid @enderror"
-                                             input="biografia"></trix-editor>
-                                @error('biografia')
+                                <label for="bibliografia">bibliografia</label>
+                                <input id="bibliografia" type="hidden" name="bibliografia" value="{{$perfil->bibliografia}}">
+                                <trix-editor class="form-control @error('bibliografia') is-invalid @enderror"
+                                             input="bibliografia"></trix-editor>
+                                @error('bibliografia')
                                 <span class='invalid-feedback d-block' role='alert'>
                                     <strong>{{$message}}</strong>
                                 </span>

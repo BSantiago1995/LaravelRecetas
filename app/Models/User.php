@@ -59,6 +59,9 @@ protected static function booted(){
 public function userPerfil(){
     return $this-> hasOne(Perfil::class);
 }
-
+public function iLike(){
+    //relaciond e n-n
+    return $this->belongsToMany(Receta::class,'like_recetas');
+}
 }
 
